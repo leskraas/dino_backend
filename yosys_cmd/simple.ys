@@ -1,0 +1,4 @@
+read_verilog ../files/demo.v
+hierarchy; proc; opt; techmap; opt
+show
+write_verilog synth.v

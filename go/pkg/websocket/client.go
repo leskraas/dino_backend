@@ -30,7 +30,8 @@ type Data struct {
 
 func executeYosys(path string) {
 	app := "../yosys/yosys"
-	arg0 := []string{"-p", "prep -auto-top; write_json ../files/out.json", path}
+	// arg0 := []string{"-p", "prep -auto-top -ifx; write_json ../files/out.json", path}
+	arg0 := []string{"-p", "prep -auto-top -flatten; write_json ../files/out.json", path}
 	yosysCmd := exec.Command(app, arg0...) //, arg1, arg2)
 
 	err := yosysCmd.Run()
@@ -80,6 +81,7 @@ func (c *Client) Read() {
 			file, _ := os.Open("../files/out.svg")
 			svg, _ := ioutil.ReadAll(file)
 			message.Data.Type = "svg"
+
 			message.Data.Content = string(svg)
 
 		}
